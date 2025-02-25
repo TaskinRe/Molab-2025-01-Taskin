@@ -2,7 +2,7 @@ import SwiftUI
 import PlaygroundSupport
 
 struct RandomArtView: View {
-    let gridSize = 10
+    let gridSize = 30
     let colors: [Color] = [.red, .blue, .green, .yellow, .purple, .orange, .pink, .cyan, .white, .black]
     
     var body: some View {
@@ -10,7 +10,7 @@ struct RandomArtView: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [.black, .purple, .blue]),
                                startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .ignoresSafeArea()
+                .ignoresSafeArea()
                 
                 Canvas { context, size in
                     let cellSize = min(size.width, size.height) / CGFloat(gridSize)
