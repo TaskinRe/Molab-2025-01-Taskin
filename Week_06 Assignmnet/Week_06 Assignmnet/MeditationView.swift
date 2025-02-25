@@ -11,7 +11,7 @@ struct MeditationView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            // 🎵 Sound Picker
+            // Sound Picker
             Picker("Sound", selection: $session.selectedSound) {
                 ForEach(MeditationSession.Sound.allCases) { sound in
                     Text(sound.rawValue.capitalized).tag(sound)
@@ -19,11 +19,11 @@ struct MeditationView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
 
-            // ⏱️ Duration Picker
+            // ⏱Duration Picker
             DurationPicker(selectedDuration: $session.timerDuration)
                 .disabled(session.isTimerRunning) //
 
-            // 🎮 Control Buttons
+            // Control Buttons
             HStack(spacing: 20) {
                 Button(action: session.start) {
                     Label("Start", systemImage: "play.circle.fill")
