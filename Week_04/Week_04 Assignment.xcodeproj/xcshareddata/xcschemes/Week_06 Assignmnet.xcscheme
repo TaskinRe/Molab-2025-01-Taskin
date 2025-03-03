@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "746B04132D6DE59E004192AD"
-               BuildableName = "Week_06 Assignmnet.app"
-               BlueprintName = "Week_06 Assignmnet"
-               ReferencedContainer = "container:Week_06 Assignmnet.xcodeproj">
+               BuildableName = "Week_04 Assignment.app"
+               BlueprintName = "Week_04 Assignment"
+               ReferencedContainer = "container:Week_04 Assignment.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "746B04232D6DE5A1004192AD"
-               BuildableName = "Week_06 AssignmnetTests.xctest"
-               BlueprintName = "Week_06 AssignmnetTests"
-               ReferencedContainer = "container:Week_06 Assignmnet.xcodeproj">
+               BuildableName = "Week_04 AssignmentTests.xctest"
+               BlueprintName = "Week_04 AssignmentTests"
+               ReferencedContainer = "container:Week_04 Assignment.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "746B042D2D6DE5A1004192AD"
-               BuildableName = "Week_06 AssignmnetUITests.xctest"
-               BlueprintName = "Week_06 AssignmnetUITests"
-               ReferencedContainer = "container:Week_06 Assignmnet.xcodeproj">
+               BuildableName = "Week_04 AssignmentUITests.xctest"
+               BlueprintName = "Week_04 AssignmentUITests"
+               ReferencedContainer = "container:Week_04 Assignment.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "746B04132D6DE59E004192AD"
-            BuildableName = "Week_06 Assignmnet.app"
-            BlueprintName = "Week_06 Assignmnet"
-            ReferencedContainer = "container:Week_06 Assignmnet.xcodeproj">
+            BuildableName = "Week_04 Assignment.app"
+            BlueprintName = "Week_04 Assignment"
+            ReferencedContainer = "container:Week_04 Assignment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -86,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "746B04132D6DE59E004192AD"
-            BuildableName = "Week_06 Assignmnet.app"
-            BlueprintName = "Week_06 Assignmnet"
-            ReferencedContainer = "container:Week_06 Assignmnet.xcodeproj">
+            BuildableName = "Week_04 Assignment.app"
+            BlueprintName = "Week_04 Assignment"
+            ReferencedContainer = "container:Week_04 Assignment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
