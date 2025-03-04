@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		746B04442D6DEBDE004192AD /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746B04432D6DEBCE004192AD /* Untitled.swift */; };
+		AB99A6742D756A92009D1389 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB99A6732D756A8D009D1389 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,26 +28,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		746B04142D6DE59E004192AD /* Week_06 Assignmnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Week_06 Assignmnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		746B04242D6DE5A1004192AD /* Week_06 AssignmnetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Week_06 AssignmnetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		746B042E2D6DE5A1004192AD /* Week_06 AssignmnetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Week_06 AssignmnetUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		746B04432D6DEBCE004192AD /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		746B04142D6DE59E004192AD /* Week_04 Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Week_04 Assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		746B04242D6DE5A1004192AD /* Week_04 AssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Week_04 AssignmentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		746B042E2D6DE5A1004192AD /* Week_04 AssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Week_04 AssignmentUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB99A6732D756A8D009D1389 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		746B04162D6DE59E004192AD /* Week_06 Assignmnet */ = {
+		746B04162D6DE59E004192AD /* Week_04 Assignment */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Week_06 Assignmnet";
-			sourceTree = "<group>";
-		};
-		746B04272D6DE5A1004192AD /* Week_06 AssignmnetTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Week_06 AssignmnetTests";
-			sourceTree = "<group>";
-		};
-		746B04312D6DE5A1004192AD /* Week_06 AssignmnetUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Week_06 AssignmnetUITests";
+			path = "Week_04 Assignment";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -80,10 +70,8 @@
 		746B040B2D6DE59E004192AD = {
 			isa = PBXGroup;
 			children = (
-				746B04432D6DEBCE004192AD /* Untitled.swift */,
-				746B04162D6DE59E004192AD /* Week_06 Assignmnet */,
-				746B04272D6DE5A1004192AD /* Week_06 AssignmnetTests */,
-				746B04312D6DE5A1004192AD /* Week_06 AssignmnetUITests */,
+				AB99A6732D756A8D009D1389 /* README.md */,
+				746B04162D6DE59E004192AD /* Week_04 Assignment */,
 				746B04152D6DE59E004192AD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,9 +79,9 @@
 		746B04152D6DE59E004192AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				746B04142D6DE59E004192AD /* Week_06 Assignmnet.app */,
-				746B04242D6DE5A1004192AD /* Week_06 AssignmnetTests.xctest */,
-				746B042E2D6DE5A1004192AD /* Week_06 AssignmnetUITests.xctest */,
+				746B04142D6DE59E004192AD /* Week_04 Assignment.app */,
+				746B04242D6DE5A1004192AD /* Week_04 AssignmentTests.xctest */,
+				746B042E2D6DE5A1004192AD /* Week_04 AssignmentUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,9 +89,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		746B04132D6DE59E004192AD /* Week_06 Assignmnet */ = {
+		746B04132D6DE59E004192AD /* Week_04 Assignment */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 746B04382D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_06 Assignmnet" */;
+			buildConfigurationList = 746B04382D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_04 Assignment" */;
 			buildPhases = (
 				746B04102D6DE59E004192AD /* Sources */,
 				746B04112D6DE59E004192AD /* Frameworks */,
@@ -114,18 +102,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				746B04162D6DE59E004192AD /* Week_06 Assignmnet */,
+				746B04162D6DE59E004192AD /* Week_04 Assignment */,
 			);
-			name = "Week_06 Assignmnet";
+			name = "Week_04 Assignment";
 			packageProductDependencies = (
 			);
 			productName = "Week_06 Assignmnet";
-			productReference = 746B04142D6DE59E004192AD /* Week_06 Assignmnet.app */;
+			productReference = 746B04142D6DE59E004192AD /* Week_04 Assignment.app */;
 			productType = "com.apple.product-type.application";
 		};
-		746B04232D6DE5A1004192AD /* Week_06 AssignmnetTests */ = {
+		746B04232D6DE5A1004192AD /* Week_04 AssignmentTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 746B043B2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_06 AssignmnetTests" */;
+			buildConfigurationList = 746B043B2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_04 AssignmentTests" */;
 			buildPhases = (
 				746B04202D6DE5A1004192AD /* Sources */,
 				746B04212D6DE5A1004192AD /* Frameworks */,
@@ -136,19 +124,16 @@
 			dependencies = (
 				746B04262D6DE5A1004192AD /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				746B04272D6DE5A1004192AD /* Week_06 AssignmnetTests */,
-			);
-			name = "Week_06 AssignmnetTests";
+			name = "Week_04 AssignmentTests";
 			packageProductDependencies = (
 			);
 			productName = "Week_06 AssignmnetTests";
-			productReference = 746B04242D6DE5A1004192AD /* Week_06 AssignmnetTests.xctest */;
+			productReference = 746B04242D6DE5A1004192AD /* Week_04 AssignmentTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		746B042D2D6DE5A1004192AD /* Week_06 AssignmnetUITests */ = {
+		746B042D2D6DE5A1004192AD /* Week_04 AssignmentUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 746B043E2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_06 AssignmnetUITests" */;
+			buildConfigurationList = 746B043E2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_04 AssignmentUITests" */;
 			buildPhases = (
 				746B042A2D6DE5A1004192AD /* Sources */,
 				746B042B2D6DE5A1004192AD /* Frameworks */,
@@ -159,14 +144,11 @@
 			dependencies = (
 				746B04302D6DE5A1004192AD /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				746B04312D6DE5A1004192AD /* Week_06 AssignmnetUITests */,
-			);
-			name = "Week_06 AssignmnetUITests";
+			name = "Week_04 AssignmentUITests";
 			packageProductDependencies = (
 			);
 			productName = "Week_06 AssignmnetUITests";
-			productReference = 746B042E2D6DE5A1004192AD /* Week_06 AssignmnetUITests.xctest */;
+			productReference = 746B042E2D6DE5A1004192AD /* Week_04 AssignmentUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -192,7 +174,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 746B040F2D6DE59E004192AD /* Build configuration list for PBXProject "Week_06 Assignmnet" */;
+			buildConfigurationList = 746B040F2D6DE59E004192AD /* Build configuration list for PBXProject "Week_04 Assignment" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -206,9 +188,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				746B04132D6DE59E004192AD /* Week_06 Assignmnet */,
-				746B04232D6DE5A1004192AD /* Week_06 AssignmnetTests */,
-				746B042D2D6DE5A1004192AD /* Week_06 AssignmnetUITests */,
+				746B04132D6DE59E004192AD /* Week_04 Assignment */,
+				746B04232D6DE5A1004192AD /* Week_04 AssignmentTests */,
+				746B042D2D6DE5A1004192AD /* Week_04 AssignmentUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -218,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB99A6742D756A92009D1389 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +225,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				746B04442D6DEBDE004192AD /* Untitled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,12 +247,12 @@
 /* Begin PBXTargetDependency section */
 		746B04262D6DE5A1004192AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 746B04132D6DE59E004192AD /* Week_06 Assignmnet */;
+			target = 746B04132D6DE59E004192AD /* Week_04 Assignment */;
 			targetProxy = 746B04252D6DE5A1004192AD /* PBXContainerItemProxy */;
 		};
 		746B04302D6DE5A1004192AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 746B04132D6DE59E004192AD /* Week_06 Assignmnet */;
+			target = 746B04132D6DE59E004192AD /* Week_04 Assignment */;
 			targetProxy = 746B042F2D6DE5A1004192AD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -402,7 +384,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Week_06 Assignmnet/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = R24Q7LT92T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -431,7 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Week_06 Assignmnet/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = R24Q7LT92T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -468,7 +450,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Week_06 Assignmnet.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Week_06 Assignmnet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Week_04 Assignment.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Week_04 Assignment";
 			};
 			name = Debug;
 		};
@@ -487,7 +469,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Week_06 Assignmnet.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Week_06 Assignmnet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Week_04 Assignment.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Week_04 Assignment";
 			};
 			name = Release;
 		};
@@ -528,7 +510,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		746B040F2D6DE59E004192AD /* Build configuration list for PBXProject "Week_06 Assignmnet" */ = {
+		746B040F2D6DE59E004192AD /* Build configuration list for PBXProject "Week_04 Assignment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				746B04362D6DE5A1004192AD /* Debug */,
@@ -537,7 +519,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		746B04382D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_06 Assignmnet" */ = {
+		746B04382D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_04 Assignment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				746B04392D6DE5A1004192AD /* Debug */,
@@ -546,7 +528,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		746B043B2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_06 AssignmnetTests" */ = {
+		746B043B2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_04 AssignmentTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				746B043C2D6DE5A1004192AD /* Debug */,
@@ -555,7 +537,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		746B043E2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_06 AssignmnetUITests" */ = {
+		746B043E2D6DE5A1004192AD /* Build configuration list for PBXNativeTarget "Week_04 AssignmentUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				746B043F2D6DE5A1004192AD /* Debug */,
