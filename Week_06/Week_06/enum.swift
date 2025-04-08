@@ -5,14 +5,6 @@
 //  Created by Rehnuma Taskin on 18/03/2025.
 //
 
-
-//
-//  NotesModel.swift
-//  Week_06
-//
-//  Created by Rehnuma Taskin on 18/03/2025.
-//
-
 import Foundation
 import SwiftUI
 
