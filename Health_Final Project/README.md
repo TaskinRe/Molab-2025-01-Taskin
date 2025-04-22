@@ -64,6 +64,21 @@ Health Final Project is an application designed to assist users in managing thei
 
 5. **Follow On-Screen Instructions:**  
    Use the interface to record voice entries, manage health documents, generate QR code profiles, and access guided recommendations.
+6. **Resources for integrating API:**
+
+    heathkit samples
+
+  - https://github.com/molab-itp/content-2025-01/blob/main/weeks/08_video.md#wwdc-sample-code
+
+  - https://developer.apple.com/documentation/healthkit/build-a-workout-app-for-apple-watch
+
+  - https://developer.apple.com/documentation/healthkit/visualizing-healthkit-state-of-mind-in-visionos
+
+  - https://developer.apple.com/documentation/healthkit/creating-a-mobility-health-app
+
+  - https://yaacoub.github.io/articles/swift-tip/retrieve-daily-step-count-from-healthkit-in-swift/
+
+
 
 ## Project Structure
 
