@@ -1,32 +1,52 @@
+//  ContentView.swift
+//  Health_FinalProject
+//
+//  Created by Rehnuma Taskin on 08/04/2025.
+//
+
 import SwiftUI
+import HealthKit
 
 struct ContentView: View {
-    @StateObject var dataController = DataController()
+    // — your existing state
+    @StateObject var dataController     = DataController()
     @State private var isShowingRecordSheet = false
 
-    let healthManager = HealthManager()
-    @State private var stepCount: Double = 0.0
-    @State private var showLowStepsPrompt = false
-    @State private var showRewardScreen = false
+    // — HealthKit & dashboard state
+    @StateObject private var hm           = HealthManager()
+    @State private var selectedMetric: MetricType?
+    @State private var goals: [MetricType: Double] = {
+        var d = [MetricType: Double]()
+        MetricType.allCases.forEach { d[$0] = $0.defaultGoal() }
+        return d
+    }()
+
+    private let columns = [ GridItem(.flexible()), GridItem(.flexible()) ]
 
     var body: some View {
         ZStack {
-            // Background
-            AnimatedGradientBackground()
-                .ignoresSafeArea()
+            Color.background.ignoresSafeArea()
 
-            VStack {
-                // Step count display
-                Text("🦶 Steps Today: \(Int(stepCount))")
-                    .font(.headline)
-                    .padding(10)
-                    .background(Color.white.opacity(0.3))
-                    .cornerRadius(12)
-                    .padding(.top, 40)
+            VStack(spacing: 0) {
+                // — Interactive Health rings
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHGrid(rows: columns, spacing: 16) {
+                        ForEach(MetricType.allCases) { m in
+                            MetricRingView(
+                                type: m,
+                                value: value(for: m),
+                                goal: goals[m]!
+                            )
+                            .onTapGesture { selectedMetric = m }
+                        }
+                    }
+                    .padding(.horizontal).padding(.top, 32)
+                }
+                .frame(height: 160)
 
-                Spacer()
+                Divider().background(Color.surface).padding(.vertical, 8)
 
-                // TabView with your modules
+                // — your existing TabView
                 TabView {
                     MedicalTranscriptionView()
                         .tabItem {
@@ -80,62 +100,73 @@ struct ContentView: View {
                         Text("Recordings")
                     }
                 }
-                .accentColor(Color.primaryColor)
+                .accentColor(.accent)
                 .font(.custom("HelveticaNeue", size: 16))
                 .onAppear {
-                    healthManager.requestAuthorization { success, error in
-                        if success {
-                            healthManager.fetchSteps { steps in
-                                self.stepCount = steps
-
-                                if steps < 2000 {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                        showLowStepsPrompt = true
-                                    }
-                                }
-                            }
-
-//                            healthManager.fetchActiveEnergy { kcal in
-//                                if kcal > 500 {
-//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                        showRewardScreen = true
-//                                    }
-//                                }
-         //                   }
-                        }
+                    NotificationManager.shared.requestAuthorization()
+                    // daily summary at 7 PM
+                    NotificationManager.shared.scheduleDailyReminder(
+                        id: "dailyHealthCheck",
+                        title: "How are you doing today?",
+                        body: "Check your steps, calories, heart-rate & sleep.",
+                        hour: 19, minute: 0
+                    )
+                    // wind-down sleep at 10 PM
+                    NotificationManager.shared.scheduleDailyReminder(
+                        id: "sleepReminder",
+                        title: "Wind Down 🛌",
+                        body: "Aim for 7–8 hours sleep tonight.",
+                        hour: 22, minute: 0
+                    )
+                    // hourly water 9AM–9PM
+                    for h in 9...21 {
+                        NotificationManager.shared.scheduleDailyReminder(
+                            id: "water_\(h)",
+                            title: "Hydrate 💧",
+                            body: "Take a glass of water.",
+                            hour: h, minute: 0
+                        )
                     }
+                    // meds
+                    NotificationManager.shared.scheduleDailyReminder(
+                        id: "medMorning",
+                        title: "Medicine 💊",
+                        body: "Time for your morning dose.",
+                        hour: 8, minute: 0
+                    )
+                    NotificationManager.shared.scheduleDailyReminder(
+                        id: "medAfternoon",
+                        title: "Medicine 💊",
+                        body: "Time for your afternoon dose.",
+                        hour: 13, minute: 0
+                    )
+                    NotificationManager.shared.scheduleDailyReminder(
+                        id: "medEvening",
+                        title: "Medicine 💊",
+                        body: "Time for your evening dose.",
+                        hour: 20, minute: 0
+                    )
                 }
             }
         }
-        // Low Steps Alert
-        .alert(isPresented: $showLowStepsPrompt) {
-            Alert(
-                title: Text("Time to Move! 🚶‍♀️"),
-                message: Text("You’ve walked less than 2,000 steps today. A short walk can boost your mood!"),
-                dismissButton: .default(Text("Got it!"))
+        .sheet(item: $selectedMetric) { m in
+            MetricDetailView(
+                goal: Binding(
+                    get: { goals[m]! },
+                    set: { goals[m] = $0 }
+                ),
+                type: m,
+                hm: hm
             )
         }
+    }
 
-        // Reward Screen Overlay
-        .fullScreenCover(isPresented: $showRewardScreen) {
-            VStack(spacing: 20) {
-                Text("🎉 Great job!")
-                    .font(.largeTitle)
-                    .bold()
-                Text("You've burned over 500 kcal today! Keep up the amazing work.")
-                    .multilineTextAlignment(.center)
-                    .padding()
-
-                Button("Dismiss") {
-                    showRewardScreen = false
-                }
-                .padding()
-                .background(Color.green.opacity(0.7))
-                .foregroundColor(.white)
-                .cornerRadius(12)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.opacity(0.6).ignoresSafeArea())
+    private func value(for m: MetricType) -> Double {
+        switch m {
+        case .steps:     return hm.steps
+        case .calories:  return hm.calories
+        case .heartRate: return hm.heartRate
+        case .sleep:     return hm.sleepHours
         }
     }
 }

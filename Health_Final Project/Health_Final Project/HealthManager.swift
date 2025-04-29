@@ -1,63 +1,154 @@
+//  HealthManager.swift
+//  Health_FinalProject
+//
+//  Created by Rehnuma Taskin on 08/04/2025.
+//
+
+import SwiftUI
 import HealthKit
 
-class HealthManager {
-    let healthStore = HKHealthStore()
+enum MetricType: String, CaseIterable, Identifiable {
+    case steps, calories, heartRate, sleep
+    var id: String { rawValue }
 
-    func requestAuthorization(completion: @escaping (Bool, Error?) -> Void) {
-        guard let steps = HKObjectType.quantityType(forIdentifier: .stepCount),
-              let energy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
-              let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else {
+    var icon: String {
+        switch self {
+        case .steps:     return "figure.walk"
+        case .calories:  return "flame.fill"
+        case .heartRate: return "heart.fill"
+        case .sleep:     return "bed.double.fill"
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .steps:     return "Steps"
+        case .calories:  return "Calories"
+        case .heartRate: return "Heart Rate"
+        case .sleep:     return "Sleep"
+        }
+    }
+
+    func defaultGoal() -> Double {
+        switch self {
+        case .steps:     return 10_000
+        case .calories:  return 500
+        case .heartRate: return 120
+        case .sleep:     return 8
+        }
+    }
+}
+
+class HealthManager: ObservableObject {
+    private let healthStore = HKHealthStore()
+    @Published var steps: Double = 0
+    @Published var calories: Double = 0
+    @Published var heartRate: Double = 0
+    @Published var sleepHours: Double = 0
+
+    private var timer: Timer?
+
+    init() {
+        requestAuthorization { ok, _ in
+            if ok {
+                DispatchQueue.main.async { self.startPolling(every: 5) }
+            }
+        }
+    }
+
+    func requestAuthorization(_ completion: @escaping (Bool, Error?) -> Void) {
+        guard HKHealthStore.isHealthDataAvailable(),
+              let s = HKQuantityType.quantityType(forIdentifier: .stepCount),
+              let e = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned),
+              let h = HKQuantityType.quantityType(forIdentifier: .heartRate),
+              let sl = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)
+        else {
             completion(false, nil)
             return
         }
-
-        let readTypes: Set = [steps, energy, heartRate]
-        healthStore.requestAuthorization(toShare: [], read: readTypes) { success, error in
-            completion(success, error)
-        }
+        healthStore.requestAuthorization(toShare: [], read: [s,e,h,sl], completion: completion)
     }
 
-    func fetchSteps(completion: @escaping (Double) -> Void) {
+    private func startPolling(every sec: TimeInterval) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: sec, repeats: true) { _ in
+            self.fetchSteps()
+            self.fetchCalories()
+            self.fetchHeartRate()
+            self.fetchSleep()
+        }
+        timer?.fire()
+    }
+
+    private func fetchSteps() {
         guard let type = HKQuantityType.quantityType(forIdentifier: .stepCount) else { return }
-        let now = Date()
-        let start = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(withStart: start, end: now, options: .strictStartDate)
-
-        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, _ in
-            let value = result?.sumQuantity()?.doubleValue(for: .count()) ?? 0
-            DispatchQueue.main.async { completion(value) }
-        }
-
-        healthStore.execute(query)
-    }
-
-    func fetchActiveEnergy(completion: @escaping (Double) -> Void) {
-        guard let type = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { return }
-        let now = Date()
-        let start = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(withStart: start, end: now, options: .strictStartDate)
-
-        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, _ in
-            let value = result?.sumQuantity()?.doubleValue(for: .kilocalorie()) ?? 0
-            DispatchQueue.main.async { completion(value) }
-        }
-
-        healthStore.execute(query)
-    }
-
-    func fetchLatestHeartRate(completion: @escaping (Double) -> Void) {
-        guard let type = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return }
-
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-        let query = HKSampleQuery(sampleType: type, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) { _, results, _ in
-            if let sample = results?.first as? HKQuantitySample {
-                let bpm = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
-                DispatchQueue.main.async { completion(bpm) }
-            } else {
-                DispatchQueue.main.async { completion(0) }
+        let start = Calendar.current.startOfDay(for: Date())
+        let pred  = HKQuery.predicateForSamples(
+            withStart: start, end: Date(), options: .strictStartDate)
+        let qry   = HKStatisticsQuery(
+            quantityType: type,
+            quantitySamplePredicate: pred,
+            options: .cumulativeSum
+        ) { _, res, _ in
+            let v = res?.sumQuantity()?.doubleValue(for: .count()) ?? 0
+            DispatchQueue.main.async { self.steps = v
+                if v < 2000 {
+                    NotificationManager.shared.scheduleOneTimeReminder(
+                        id: "lowSteps", title: "Time to Move! 🚶‍♀️",
+                        body: "You've walked only \(Int(v)) steps so far today.",
+                        after: 1
+                    )
+                }
             }
         }
+        healthStore.execute(qry)
+    }
 
-        healthStore.execute(query)
+    private func fetchCalories() {
+        guard let type = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { return }
+        let start = Calendar.current.startOfDay(for: Date())
+        let pred  = HKQuery.predicateForSamples(
+            withStart: start, end: Date(), options: .strictStartDate)
+        let qry   = HKStatisticsQuery(
+            quantityType: type,
+            quantitySamplePredicate: pred,
+            options: .cumulativeSum
+        ) { _, res, _ in
+            let v = res?.sumQuantity()?.doubleValue(for: .kilocalorie()) ?? 0
+            DispatchQueue.main.async { self.calories = v }
+        }
+        healthStore.execute(qry)
+    }
+
+    private func fetchHeartRate() {
+        guard let type = HKQuantityType.quantityType(forIdentifier: .heartRate) else { return }
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        let qry  = HKSampleQuery(
+            sampleType: type, predicate: nil, limit: 1, sortDescriptors: [sort]
+        ) { _, res, _ in
+            let v = (res?.first as? HKQuantitySample)?
+                .quantity.doubleValue(for: HKUnit(from: "count/min")) ?? 0
+            DispatchQueue.main.async { self.heartRate = v }
+        }
+        healthStore.execute(qry)
+    }
+
+    private func fetchSleep() {
+        guard let type = HKCategoryType.categoryType(forIdentifier: .sleepAnalysis) else { return }
+        let start = Calendar.current.startOfDay(for: Date())
+        let pred  = HKQuery.predicateForSamples(
+            withStart: start, end: Date(), options: .strictStartDate)
+        let qry   = HKSampleQuery(
+            sampleType: type, predicate: pred,
+            limit: HKObjectQueryNoLimit, sortDescriptors: nil
+        ) { _, res, _ in
+            let secs = (res as? [HKCategorySample])?.reduce(0) { acc, s in
+                s.value == HKCategoryValueSleepAnalysis.asleep.rawValue
+                  ? acc + s.endDate.timeIntervalSince(s.startDate)
+                  : acc
+            } ?? 0
+            DispatchQueue.main.async { self.sleepHours = secs / 3600 }
+        }
+        healthStore.execute(qry)
     }
 }
